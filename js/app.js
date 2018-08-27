@@ -15,6 +15,10 @@ Enemy.prototype.update = function(dt) {
         this.y = this.randomY();
         this.speed = this.randomSpeed();
     };
+    // Reset the player if they collide with an enemy.
+    if (this.x + 75 >= player.x && this.x <= player.x + 75 && this.y + 8 == player.y) {
+        player.start();
+    }
 };
 
 // Places an enemy a random distance off screen when spawned.
@@ -58,7 +62,7 @@ class Player {
 
     // Return player to the starting position once it reaches the water after 1/10th of a second.
     update() {
-        if (this.y < 0) {
+        if (this.y === -15) {
             setTimeout(() => {
                 this.start();
             }, 100);
@@ -71,6 +75,7 @@ class Player {
 
     // Moves the player 1 square each key press.
     handleInput() {
+        // Player Y Values: 400, 317, 234, 151, 68, -15
         if (event.keyCode === 37 && this.x > 0) {
             this.x -= 100;
         }
