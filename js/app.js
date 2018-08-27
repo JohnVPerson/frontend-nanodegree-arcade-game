@@ -3,7 +3,7 @@ var Enemy = function(y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = 1;
-    this.y = y;
+    this.y = this.randomY();
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -16,6 +16,17 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 };
+
+Enemy.prototype.randomY = function() {
+    let randomNumber = Math.random();
+    if (0 <= randomNumber && randomNumber < 0.33) {
+        return 60;
+    } else if (0.33 <= randomNumber && randomNumber < 0.66) {
+        return 143;
+    } else if ( 0.66 <= randomNumber && randomNumber < 1) {
+        return 226;
+    }
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -52,7 +63,7 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies = [new Enemy(60), new Enemy(143), new Enemy(226)];
+let allEnemies = [new Enemy(), new Enemy(), new Enemy()];
 let player = new Player();
 
 
