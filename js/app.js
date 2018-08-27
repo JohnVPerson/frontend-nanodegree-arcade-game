@@ -1,9 +1,10 @@
 // Enemies our player must avoid
-var Enemy = function(y) {
+var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.x = 1;
     this.y = this.randomY();
+    this.speed = 100;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -12,11 +13,15 @@ var Enemy = function(y) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    if (this.x < 500) {
+        this.x += 4 * this.speed * dt;
+    } else {
+        this.x = 1;
+        this.y = this.randomY();
+    }
 };
 
+// Places an enemy on a random track.
 Enemy.prototype.randomY = function() {
     let randomNumber = Math.random();
     if (0 <= randomNumber && randomNumber < 0.33) {
