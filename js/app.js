@@ -56,9 +56,14 @@ class Player {
         this.y = 400;
     }
 
+    // Return player to the starting position once it reaches the water after 1/10th of a second.
     update() {
-
-    }
+        if (this.y < 0) {
+            setTimeout(() => {
+                this.start();
+            }, 100);
+        };
+    };
 
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
