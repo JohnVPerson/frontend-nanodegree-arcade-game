@@ -1,12 +1,7 @@
-// Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    this.x = 1;
+    this.x = this.randomX();
     this.y = this.randomY();
-    this.speed = 100;
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    this.speed = this.randomSpeed();
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -16,9 +11,15 @@ Enemy.prototype.update = function(dt) {
     if (this.x < 500) {
         this.x += 4 * this.speed * dt;
     } else {
-        this.x = 1;
+        this.x = this.randomX();
         this.y = this.randomY();
-    }
+        this.speed = this.randomSpeed();
+    };
+};
+
+// Places an enemy a random distance off screen when spawned.
+Enemy.prototype.randomX = function() {
+    return (Math.floor(Math.random() * -600) - 100);
 };
 
 // Places an enemy on a random track.
@@ -30,8 +31,13 @@ Enemy.prototype.randomY = function() {
         return 143;
     } else if ( 0.66 <= randomNumber && randomNumber < 1) {
         return 226;
-    }
-}
+    };
+};
+
+// Enemies will spawn with different speeds at load and respawn.
+Enemy.prototype.randomSpeed = function() {
+    return (Math.floor(Math.random() * 150) + 20);
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
